@@ -22,3 +22,23 @@ def score_game(game_core):
     score = int(np.mean(count_ls))
     print(f"Ваш алгоритм угадывает число в среднем за {score} попыток")
     return(score)
+
+
+def game_core_v3(number):
+    '''Сначала устанавливаем любое random число, а потом уменьшаем или увеличиваем его в зависимости от того, больше оно или меньше нужного.
+       Функция принимает загаданное число и возвращает число попыток'''
+    count = 1
+    predict = 50
+    pmin = 1
+    pmax = 101
+    while number != predict:
+        count+=1
+        if number > predict:
+            predict, pmin = (predict + pmax) // 2, predict
+        elif number < predict:
+            predict, pmax = (predict + pmin) // 2, predict
+    return(count) # выход из цикла, если угадали
+
+
+if __name__ == '__main__':
+    score_game(game_core_v3)
